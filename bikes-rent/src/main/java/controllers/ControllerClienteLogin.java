@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.ClienteLoginDAO;
 import domain.Cliente;
+import service.EmailService;
 
 // Confere as informações de login do cliente provenientes do loginCliente.jsp
 @WebServlet("/clienteLogin")
@@ -38,6 +39,7 @@ public class ControllerClienteLogin extends HttpServlet {
                 session.setAttribute("nome", cliente.getNome());
                 session.setAttribute("role", "cliente");
                 String redirectTo = (String) session.getAttribute("redirectTo");
+                EmailService.sendWelcomeEmail(email);
                 if (redirectTo != null) {
                     session.removeAttribute("redirectTo");
                     response.sendRedirect(redirectTo);

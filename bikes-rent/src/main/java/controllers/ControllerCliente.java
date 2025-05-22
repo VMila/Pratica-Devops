@@ -156,18 +156,6 @@ public class ControllerCliente extends HttpServlet {
         }
         Locacao novaLocacao = new Locacao(cpfCliente, cnpjLocadora, dtDiaHora);
 
-        Boolean funcionou = daoLocacao.insert(novaLocacao);
-        if (funcionou) {
-            String formatedDate = DataUtils.parseEmailData(dataHora);
-            EmailService.sendEmail(email, "Locacao Feita (" + formatedDate + ")", "Sua locacao foi feita com sucesso!");
-            EmailService.sendEmail(emailLocadora, "Locacao Feita (" + formatedDate + ")",
-                    "Um cliente realizou uma locacao com sucesso!");
-            response.sendRedirect("clienteCPF");
-        } else {
-            String errorMessage = URLEncoder.encode("Locacao ja existe!",
-                    StandardCharsets.UTF_8.toString());
-            response.sendRedirect("novoLocacao?error=" + errorMessage);
-        }
 
     }
 
@@ -279,6 +267,7 @@ public class ControllerCliente extends HttpServlet {
 
         Cliente novoCliente = new Cliente(email, senha, nome, telefone, sexo, cpf, dataNascimento);
         dao.insert(novoCliente);
+        System.out.println("enviou cliente");
         response.sendRedirect("");
     }
 

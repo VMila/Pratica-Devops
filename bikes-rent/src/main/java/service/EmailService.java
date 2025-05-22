@@ -1,32 +1,33 @@
 package service;
 
-import com.sendgrid.*;
-import com.sendgrid.helpers.mail.Mail;
-import com.sendgrid.helpers.mail.objects.Content;
-import com.sendgrid.helpers.mail.objects.Email;
-import io.github.cdimascio.dotenv.Dotenv;
-import java.io.IOException;
+import jakarta.mail.*;
+import jakarta.mail.internet.*;
+import java.util.Properties;
+
 public class EmailService {
 
-    public static void sendEmail(String email, String subject, String message) throws IOException {
-        Email from = new Email("thativancapeli@gmail.com");
-        Email to = new Email(email);
-        Content content = new Content("text/plain", message);
-        Mail mail = new Mail(from, subject, to, content);
-        Dotenv dotenv = Dotenv.load();
-        SendGrid sg = new SendGrid(dotenv.get("EMAILKEY"));
-        Request request = new Request();
+    public static void sendWelcomeEmail(String to) {
+         System.getLogger("emdiajd").log(System.Logger.Level.INFO, "dentro doe mail");
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "mailhog"); 
+        props.put("mail.smtp.port", "1025"); 
+
+        Session session = Session.getInstance(props);
+
         try {
-            request.setMethod(Method.POST);
-            request.setEndpoint("mail/send");
-            request.setBody(mail.build());
-            Response response = sg.api(request);
-            // System.out.println(response.getStatusCode());
-            // System.out.println(response.getBody());
-            // System.out.println(response.getHeaders());
-        } catch (IOException ex) {
-            throw ex;
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("no-reply@suaapp.com"));
+            message.setRecipients(
+                Message.RecipientType.TO, InternetAddress.parse(to)
+            );
+            message.setSubject("Bem-vindo!");
+            message.setText("Obrigado por se cadastrar em nossa plataforma!");
+
+            Transport.send(message);
+            System.out.println("E-mail enviado com sucesso para " + to);
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
         }
-  }
-    
+    }
 }

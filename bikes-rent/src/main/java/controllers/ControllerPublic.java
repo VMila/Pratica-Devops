@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.ClienteDAO;
 import domain.Cliente;
+import service.EmailService;
 
 // Controller que abriga funções gerais e públicas a todos os usuários e personas
 @WebServlet("/public/*")
@@ -82,6 +83,7 @@ public class ControllerPublic extends HttpServlet {
         try {
             Cliente novoCliente = new Cliente(email, senha, nome, telefone, sexo, cpf, dataNascimento);
             clienteDAO.insert(novoCliente);
+            EmailService.sendWelcomeEmail(email);
             response.sendRedirect("/bikes-rent/");
         } catch (Exception e) {
             throw new RuntimeException(e);

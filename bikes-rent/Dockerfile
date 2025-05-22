@@ -1,7 +1,7 @@
 # Use uma imagem Maven com JDK
 FROM maven:3.8.5-openjdk-17 AS builder
 
-# Copia os arquivos da aplicação (incluindo o .env)
+# Copia os arquivos da aplicação 
 WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
@@ -15,7 +15,7 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 # Copia o WAR gerado
 COPY --from=builder /app/target/*.war /usr/local/tomcat/webapps/bikes-rent.war
 
-# Copia o arquivo .env para dentro do container na pasta /usr/local/tomcat (ou onde seu app espera)
+# Copia o arquivo .env para dentro do container na pasta /usr/local/tomcat
 COPY --from=builder /app/.env /usr/local/tomcat/.env
 
 # Expõe a porta do Tomcat

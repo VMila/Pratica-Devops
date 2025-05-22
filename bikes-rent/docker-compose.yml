@@ -8,7 +8,6 @@ services:
       MYSQL_DATABASE: bikeRentSystem
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-    command: --default-authentication-plugin=mysql_native_password
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-uuser", "-ppassword"]
       interval: 5s
@@ -17,8 +16,6 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
       - ./database/db.sql:/docker-entrypoint-initdb.d/db.sql
-    ports:
-      - "3307:3306"
     networks:
       - bike-network
 
@@ -32,8 +29,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    ports:
-      - "8080:8080"
     networks:
       - bike-network
 

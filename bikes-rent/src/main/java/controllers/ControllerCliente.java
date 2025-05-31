@@ -137,17 +137,14 @@ public class ControllerCliente extends HttpServlet {
 
     // Insere nova locação no banco de dados
     private void inserirLocacao(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+                 throws ServletException, IOException, SQLException {
         HttpSession session = request.getSession();
         String cpfCliente = (String) session.getAttribute("cpf");
-        String email = (String) session.getAttribute("email");
 
         String cnpjLocadora = request.getParameter("cnpj");
         String dataHora = request.getParameter("dataHorario");
         LocalDateTime dtDiaHora = LocalDateTime.parse(dataHora);
 
-        Locadora locadora = daoLocadora.getByCnpj(cnpjLocadora);
-        String emailLocadora = locadora.getEmail();
         if (!DataUtils.checkFullHour(dtDiaHora)) {
             String errorMessage = URLEncoder.encode("O registro deve estar na hora cheia (ex: 13:00, 15:00).",
                     StandardCharsets.UTF_8.toString());
@@ -156,6 +153,14 @@ public class ControllerCliente extends HttpServlet {
         }
         Locacao novaLocacao = new Locacao(cpfCliente, cnpjLocadora, dtDiaHora);
 
+        Boolean funcionou = daoLocacao.insert(novaLocacao);
+        if (funcionou) {
+            response.sendRedirect("clienteCPF");
+        } else {
+            String errorMessage = URLEncoder.encode("Locacao ja existe!",
+                    StandardCharsets.UTF_8.toString());
+            response.sendRedirect("novoLocacao?error=" + errorMessage);
+        }
 
     }
 

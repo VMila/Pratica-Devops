@@ -84,7 +84,7 @@ public class ControllerPublic extends HttpServlet {
             Cliente novoCliente = new Cliente(email, senha, nome, telefone, sexo, cpf, dataNascimento);
             clienteDAO.insert(novoCliente);
             EmailService.sendWelcomeEmail(email);
-            response.sendRedirect("/bikes-rent/");
+            response.sendRedirect("/");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

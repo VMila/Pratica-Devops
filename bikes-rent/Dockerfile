@@ -13,7 +13,7 @@ FROM tomcat:9.0-jdk17-temurin
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 # Copia o WAR gerado
-COPY --from=builder /app/target/*.war /usr/local/tomcat/webapps/bikes-rent.war
+COPY --from=builder /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 
 # Copia o arquivo .env para dentro do container na pasta /usr/local/tomcat
 COPY --from=builder /app/.env /usr/local/tomcat/.env

@@ -14,7 +14,7 @@
 <body class="bg-gray-100">
     <nav class="bg-white border-gray-200 dark:bg-gray-500">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="/bikes-rent" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="../imagemLogoSemFundo3.png"
                  class="h-8" alt="System Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white font-elegant">
@@ -29,21 +29,21 @@
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
                 <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-500 dark:border-gray-700">
                     <li>
-                        <a href="/bikes-rent/public/" class="block py-2 px-3 text-gray-100 bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white
+                        <a href="/public/" class="block py-2 px-3 text-gray-100 bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white
                          hover:text-blue-300 transition duration-300"
                          aria-current="page">
                          <fmt:message key="cliente.register" />
                         </a>
                     </li>
                     <li>
-                        <a href="/bikes-rent/locadoraLogged/" class="block py-2 px-3 md:text-blue-700 hover:text-blue-300 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0
+                        <a href="/locadoraLogged/" class="block py-2 px-3 md:text-blue-700 hover:text-blue-300 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0
                          md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent
                          transition duration-300">
                          <fmt:message key="locadora" />
                         </a>
                     </li>
                     <li>
-                        <a href="/bikes-rent/admin/" class="block py-2 px-3 md:text-blue-700 hover:text-blue-300 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-white
+                        <a href="/admin/" class="block py-2 px-3 md:text-blue-700 hover:text-blue-300 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0 dark:text-white
                          md:dark:hover:text-blue-200 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent transition duration-300">
                             Admin</a>
                     </li>
